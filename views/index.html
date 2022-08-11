@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="/static/site.css" />
+    
+    
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Todo App</title>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 center-align">
+                <h5>TODO LIST</h5>
+                <div class="divider"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 left-align">
+                <table>
+                    <thead>
+                        <th>Task</th>
+                        <th>Assignee</th>
+                        <th>Deadline</th>
+                        <th>Status</th>
+                        <th>Action</th>
+
+                    </thead>
+                    <tbody>
+                        {{range  .}}
+                        <tr>
+                            {{if eq .Status 1}}
+                            <td class="grey-text">{{.Name}}</td>
+                            {{else}}
+                            <td>{{.Name}}</td>
+                            {{end}}
+                            <td>{{.Assignee}}</td> 
+                            <td>{{.Deadline}}</td>
+                            {{if eq .Status 1}}
+                            <td>Completed</td>
+                            {{else}}
+                            <td>Uncompleted</td>
+                            {{end}}
+                            <td>
+                                {{if eq .Status 0}}
+                                <a href="/set_complete/?id={{.Id}}" class="btn yellow darken-3 white-text waves-effect waves-light"><i class="material-icons left">check</i>Complete</a>
+                                <a href="/edit/?id={{.Id}}" class="btn brown lighten-3 white-text waves-effect waves-light"><i class="material-icons left">edit</i>Edit</a>
+                                {{end}}
+                                <a href="/delete/?id={{.Id}}" class="btn red darken-1 white-text waves-effect waves-light"><i class="material-icons left">close</i>Del</a>
+                                
+                            </td>
+                        </tr>
+                        {{end}}        
+                    </tbody>
+                </table>
+                
+                <br><br>
+                <a href="/add" class="btn green lighten-1 white-text waves-effect waves-light"><i class="material-icons left">add</i>Add Todo</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/jquery-3.6.0.min.js"></script>
+    <!--JavaScript at end of body for optimized loading-->
+    <script src="/static/materialize.min.js"></script>
+
+</body>
+</html>
